@@ -1,0 +1,57 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:padding="10dp"
+                tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:textSize="20sp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:text="My Nanodegree Apps!"/>
+
+    <Button
+        android:id="@+id/spotifyStreamerAppBtn"
+        style="@style/ButtonTheme"
+        android:layout_below="@id/title"
+        android:text="spotify streamer"/>
+
+    <Button
+        android:id="@+id/scoresAppBtn"
+        style="@style/ButtonTheme"
+        android:layout_below="@id/spotifyStreamerAppBtn"
+        android:text="scores app"/>
+
+    <Button
+        android:id="@+id/libraryAppBtn"
+        style="@style/ButtonTheme"
+        android:layout_below="@id/scoresAppBtn"
+        android:text="library app"/>
+
+    <Button
+        android:id="@+id/buildItBiggerAppBtn"
+        style="@style/ButtonTheme"
+        android:layout_below="@id/libraryAppBtn"
+        android:text="build it bigger"/>
+
+    <Button
+        android:id="@+id/xyzReaderAppBtn"
+        style="@style/ButtonTheme"
+        android:layout_below="@id/buildItBiggerAppBtn"
+        android:text="xyz reader"/>
+
+    <Button
+        android:id="@+id/capstoneAppBtn"
+        style="@style/ButtonTheme"
+        android:background="#D50000"
+        android:textColor="#FFFFFF"
+        android:layout_below="@id/xyzReaderAppBtn"
+        android:text="Capstone: my own app"/>
+
+</RelativeLayout>
