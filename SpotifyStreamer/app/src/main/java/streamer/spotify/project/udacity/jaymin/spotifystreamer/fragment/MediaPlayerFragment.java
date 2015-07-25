@@ -251,12 +251,15 @@ public class MediaPlayerFragment extends BaseDialogFragment implements View.OnCl
         String backgroundImageUrl = getImageUrl();
         if (!TextUtils.isEmpty(backgroundImageUrl))
         {
-            Glide.with(getActivity())
-                    .load(backgroundImageUrl)
-                    .centerCrop()
-                    .placeholder(R.drawable.music)
-                    .crossFade()
-                    .into(mediaPlayerBackground);
+            if (getActivity() != null)
+            {
+                Glide.with(getActivity())
+                        .load(backgroundImageUrl)
+                        .centerCrop()
+                        .placeholder(R.drawable.music)
+                        .crossFade()
+                        .into(mediaPlayerBackground);
+            }
         }
         else
         {

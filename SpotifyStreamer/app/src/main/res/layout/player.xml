@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:text="Coldplay"
+            android:background="#70000000"
             android:textColor="#FFFFFF"/>
 
         <TextView
@@ -33,6 +33,7 @@
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:text="Ghost Stories"
+            android:background="#70000000"
             android:textColor="#FFFFFF"/>
     </LinearLayout>
 
@@ -53,8 +54,8 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:padding="5dp"
-            android:background="#70FFFFFF"
-            android:text="A sky full of stars"/>
+            android:background="#70000000"
+            android:textColor="#FFFFFF"/>
 
         <SeekBar
             android:id="@+id/mediaPlayerSeekBar"
@@ -71,8 +72,8 @@
             android:layout_below="@id/mediaPlayerSeekBar"
             android:padding="5dp"
             android:text="0:00"
-            android:background="#70FFFFFF"
-            android:textColor="#000000"/>
+            android:background="#70000000"
+            android:textColor="#FFFFFF"/>
 
         <TextView
             android:id="@+id/mediaPlayerTotalTime"
@@ -83,8 +84,8 @@
             android:layout_below="@id/mediaPlayerSeekBar"
             android:padding="5dp"
             android:text="0:00"
-            android:background="#70FFFFFF"
-            android:textColor="#000000"/>
+            android:background="#70000000"
+            android:textColor="#FFFFFF"/>
 
         <ImageView
             android:id="@+id/mediaPlayerControlPrevious"
