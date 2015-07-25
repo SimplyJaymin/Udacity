@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/mediaPlayerBackgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"/>
+
+    <LinearLayout
+        android:id="@+id/mediaPlayerTopContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/black_transparent_gradient_fade_out"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/mediaPlayerArtistName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="Coldplay"
+            android:textColor="#FFFFFF"/>
+
+        <TextView
+            android:id="@+id/mediaPlayerAlbumName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="Ghost Stories"
+            android:textColor="#FFFFFF"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/mediaPlayerControlsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/black_transparent_gradient_fade_in"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/mediaPlayerSongName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:padding="5dp"
+            android:background="#70FFFFFF"
+            android:text="A sky full of stars"/>
+
+        <SeekBar
+            android:id="@+id/mediaPlayerSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mediaPlayerSongName"/>
+
+        <TextView
+            android:id="@+id/mediaPlayerCurrentTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/mediaPlayerSeekBar"
+            android:padding="5dp"
+            android:text="0:00"
+            android:background="#70FFFFFF"
+            android:textColor="#000000"/>
+
+        <TextView
+            android:id="@+id/mediaPlayerTotalTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/mediaPlayerSeekBar"
+            android:padding="5dp"
+            android:text="0:00"
+            android:background="#70FFFFFF"
+            android:textColor="#000000"/>
+
+        <ImageView
+            android:id="@+id/mediaPlayerControlPrevious"
+            style="@style/MediaPlayerControls"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/mediaPlayerCurrentTime"
+            android:src="@drawable/icon_previous"/>
+
+        <FrameLayout
+            style="@style/MediaPlayerControls"
+            android:layout_below="@id/mediaPlayerTotalTime"
+            android:layout_centerHorizontal="true">
+
+            <ImageView
+                android:id="@+id/mediaPlayerControlPlayPause"
+                style="@style/MediaPlayerControls"
+                android:src="@drawable/icon_play"/>
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"/>
+        </FrameLayout>
+
+        <ImageView
+            android:id="@+id/mediaPlayerControlNext"
+            style="@style/MediaPlayerControls"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/mediaPlayerTotalTime"
+            android:src="@drawable/icon_next"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
