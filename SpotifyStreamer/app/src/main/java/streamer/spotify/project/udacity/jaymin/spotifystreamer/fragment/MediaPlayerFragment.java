@@ -160,12 +160,14 @@ public class MediaPlayerFragment extends BaseDialogFragment implements View.OnCl
         }
         else if (viewClickedID == R.id.mediaPlayerControlNext)
         {
+            stopMediaPlayer();
             selectedTrackPosition++;
             track = topTracks.get(selectedTrackPosition);
             populateViews();
         }
         else if (viewClickedID == R.id.mediaPlayerControlPrevious)
         {
+            stopMediaPlayer();
             selectedTrackPosition--;
             track = topTracks.get(selectedTrackPosition);
             populateViews();
@@ -178,9 +180,18 @@ public class MediaPlayerFragment extends BaseDialogFragment implements View.OnCl
         super.onStop();
         if (mediaPlayer != null && mediaPlayer.isPlaying())
         {
-            mediaPlayer.stop();
+            stopMediaPlayer();
         }
         durationHandler.removeCallbacks(updateSeekBarTime);
+    }
+
+    private void stopMediaPlayer()
+    {
+        if(mediaPlayer.isPlaying())
+        {
+            mediaPlayer.stop();
+            updatePlayPauseIcon();
+        }
     }
 
     private void playOrResume()
@@ -255,9 +266,7 @@ public class MediaPlayerFragment extends BaseDialogFragment implements View.OnCl
             {
                 Glide.with(getActivity())
                         .load(backgroundImageUrl)
-                        .centerCrop()
-                        .placeholder(R.drawable.music)
-                        .crossFade()
+                        .fitCenter()
                         .into(mediaPlayerBackground);
             }
         }

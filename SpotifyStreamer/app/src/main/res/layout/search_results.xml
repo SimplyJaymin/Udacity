@@ -13,6 +13,23 @@
         android:imeOptions="actionDone"
         android:singleLine="true"/>
 
+    <TextView
+        android:id="@+id/recentSearchesHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:padding="12dp"
+        android:textStyle="italic|bold"
+        android:text="Recent Searches"
+        android:visibility="visible"/>
+
+    <TextView
+        android:id="@+id/emptySearchResults"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone"/>
+    
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

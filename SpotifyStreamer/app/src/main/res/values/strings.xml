@@ -1,7 +1,12 @@
 <resources>
-    <string name="app_name">SpotifyStreamer</string>
+    <string name="app_name">Spotify Streamer</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_top_tracks">TopTracksActivity</string>
+    <string name="title_activity_top_tracks">Top Tracks</string>
+    <string name="select_from_search_results_info_message">Click on any of the search results to view the artist\'s top tracks</string>
+    <string name="no_search_results_message">No search results found</string>
+    <string name="no_tracks_found_message">No tracks found</string>
+    <string name="no_recent_searches_message">No recent searches found</string>
+    <string name="no_network_connection_message">No network connection. Please try again later</string>
+
 </resources>

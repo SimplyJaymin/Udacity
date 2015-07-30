@@ -20,12 +20,5 @@
         android:layout_height="match_parent">
 
     </FrameLayout>
-    <!--<fragment-->
-        <!--android:id="@+id/topTracksFragment"-->
-        <!--class="streamer.spotify.project.udacity.jaymin.spotifystreamer.fragment.ArtistTopTracksFragment"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_weight="0.6"-->
-        <!--android:layout_height="match_parent"-->
-        <!--tools:layout="@layout/top_tracks"/>-->
 
 </LinearLayout>

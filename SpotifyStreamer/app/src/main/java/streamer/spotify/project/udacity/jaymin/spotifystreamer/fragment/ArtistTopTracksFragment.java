@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,7 +22,6 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import streamer.spotify.project.udacity.jaymin.spotifystreamer.R;
-import streamer.spotify.project.udacity.jaymin.spotifystreamer.activity.BaseActivity;
 import streamer.spotify.project.udacity.jaymin.spotifystreamer.adapter.TopTracksAdapter;
 import streamer.spotify.project.udacity.jaymin.spotifystreamer.interfaces.SelectedTrackClickListener;
 
@@ -38,6 +38,7 @@ public class ArtistTopTracksFragment extends BaseFragment
     private RecyclerView recyclerView;
     private String artistId;
     public static final String BUNDLE_KEY_ARTIST_ID = "ARTIST_ID";
+    private TextView infoText;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -107,14 +108,23 @@ public class ArtistTopTracksFragment extends BaseFragment
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(topTracksAdapter);
+        infoText = (TextView) rootView.findViewById(R.id.infoText);
+        if (isDualPane())
+        {
+            infoText.setText(getString(R.string.select_from_search_results_info_message));
+            infoText.setVisibility(View.VISIBLE);
+        }
     }
 
     private void getTopTracks()
     {
-        progressBar.setVisibility(View.VISIBLE);
-        Map<String, Object> params = new HashMap<>();
-        params.put("country", "CA");
-        spotifyService.getArtistTopTrack(artistId, params, tracksPagerCallback);
+        if (isOnline())
+        {
+            progressBar.setVisibility(View.VISIBLE);
+            Map<String, Object> params = new HashMap<>();
+            params.put("country", "CA");
+            spotifyService.getArtistTopTrack(artistId, params, tracksPagerCallback);
+        }
     }
 
     public void displayTopTracks(String artistId)
@@ -130,7 +140,7 @@ public class ArtistTopTracksFragment extends BaseFragment
         mediaPlayerFragment.setTrack(selectedTrack);
         mediaPlayerFragment.setTopTrackList(topTracks);
 
-        if (((BaseActivity) getActivity()).isDualPane())
+        if (isDualPane())
         {
             mediaPlayerFragment.show(fragmentManager, MediaPlayerFragment.TAG);
         }
@@ -151,6 +161,17 @@ public class ArtistTopTracksFragment extends BaseFragment
             topTracks = tracks.tracks;
             topTracksAdapter.set(topTracks);
             topTracksAdapter.notifyDataSetChanged();
+
+            if (isDualPane())
+            {
+                infoText.setVisibility(View.GONE);
+            }
+
+            if(topTracks.size() == 0)
+            {
+                infoText.setText(getString(R.string.no_tracks_found_message));
+                infoText.setVisibility(View.VISIBLE);
+            }
         }
 
         @Override

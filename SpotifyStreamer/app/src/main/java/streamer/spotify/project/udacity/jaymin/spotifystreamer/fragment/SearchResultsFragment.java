@@ -3,6 +3,7 @@ package streamer.spotify.project.udacity.jaymin.spotifystreamer.fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import streamer.spotify.project.udacity.jaymin.spotifystreamer.R;
+import streamer.spotify.project.udacity.jaymin.spotifystreamer.activity.BaseActivity;
 import streamer.spotify.project.udacity.jaymin.spotifystreamer.adapter.SearchResultsAdapter;
 import streamer.spotify.project.udacity.jaymin.spotifystreamer.dto.Artist;
 import streamer.spotify.project.udacity.jaymin.spotifystreamer.interfaces.SearchResultItemClickListener;
@@ -38,6 +40,9 @@ public class SearchResultsFragment extends BaseFragment
     private RecyclerView recyclerView;
     private SearchResultItemClickListener searchResultItemClickListener;
     private static final String BUNDLE_SEARCH_RESULTS = "SEARCH_RESULTS";
+    private String lastSearchQuery;
+    private TextView latestSearchHeader;
+    private TextView emptyResultsText;
 
     private Callback<ArtistsPager> artistsPagerCallback = new Callback<ArtistsPager>()
     {
@@ -48,6 +53,8 @@ public class SearchResultsFragment extends BaseFragment
             searchResults = SearchResultsArtistParser.getArtists(artistsPager.artists.items);
             searchResultsAdapter = new SearchResultsAdapter(searchResults, searchResultItemClickListener, getActivity());
             recyclerView.setAdapter(searchResultsAdapter);
+            emptyResultsText.setText(getString(R.string.no_search_results_message));
+            emptyResultsText.setVisibility((searchResults.size() == 0) ? View.VISIBLE : View.GONE);
         }
 
         @Override
@@ -66,6 +73,7 @@ public class SearchResultsFragment extends BaseFragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        lastSearchQuery = getStringFromPreferences(BaseActivity.PreferenceKeys.LATEST_SEARCH_QUERY_KEY);
         setRetainInstance(true);
     }
 
@@ -87,6 +95,15 @@ public class SearchResultsFragment extends BaseFragment
             searchResultsAdapter = new SearchResultsAdapter(searchResults, searchResultItemClickListener, getActivity());
             recyclerView.setAdapter(searchResultsAdapter);
         }
+        else if (!TextUtils.isEmpty(lastSearchQuery))
+        {
+            searchArtist(lastSearchQuery);
+        }
+        else
+        {
+            emptyResultsText.setText(getString(R.string.no_recent_searches_message));
+            emptyResultsText.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -98,6 +115,8 @@ public class SearchResultsFragment extends BaseFragment
 
     private void initViews(View rootView)
     {
+        latestSearchHeader = (TextView) rootView.findViewById(R.id.recentSearchesHeader);
+        emptyResultsText = (TextView) rootView.findViewById(R.id.emptySearchResults);
         progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
         artistSearchInput = (EditText) rootView.findViewById(R.id.searchArtistInput);
         artistSearchInput.setOnEditorActionListener(new TextView.OnEditorActionListener()
@@ -108,6 +127,8 @@ public class SearchResultsFragment extends BaseFragment
                 boolean handled = false;
                 if (actionId == EditorInfo.IME_ACTION_DONE)
                 {
+                    latestSearchHeader.setVisibility(View.GONE);
+                    saveStringInPreferences(BaseActivity.PreferenceKeys.LATEST_SEARCH_QUERY_KEY, v.getText().toString());
                     searchArtist(v.getText().toString());
                     handled = true;
                 }
@@ -122,7 +143,10 @@ public class SearchResultsFragment extends BaseFragment
     private void searchArtist(String query)
     {
         ViewUtils.hideSoftKeyboard(getActivity(), artistSearchInput);
-        progressBar.setVisibility(View.VISIBLE);
-        spotifyService.searchArtists(query, artistsPagerCallback);
+        if (isOnline())
+        {
+            progressBar.setVisibility(View.VISIBLE);
+            spotifyService.searchArtists(query, artistsPagerCallback);
+        }
     }
 }
